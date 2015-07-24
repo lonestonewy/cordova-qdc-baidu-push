@@ -112,3 +112,24 @@ ionic.Platform.isIOS()
 ionic.Platform.isAndroid()
 ```
 
+例如：
+
+```js
+// 注意返回值格式不同
+if (window.device) {
+    var baidu_push_api_key = device.platform == 'iOS' ? '百度推送IOS密钥' : '百度推送安卓密钥';
+    baidu_push.startWork(baidu_push_api_key, function(json) {
+        // 将channelId和userId存储，待用户登录后回传服务器
+        if (device.platform == 'iOS') {
+            userId = json.user_id;
+            channelId = json.channel_id;
+        } else {
+            userId = json.data.userId;
+            channelId = json.data.channelId;
+        }
+
+        $localStorage.userId = userId;
+        $localStorage.channelId = channelId;
+    });
+}
+```
