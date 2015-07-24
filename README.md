@@ -1,3 +1,5 @@
+# 修正方法已成功，有空放上来吧
+
 # cordova-qdc-baidu-push
 百度云推送cordova插件(Android版)
 
