@@ -20,52 +20,40 @@
 - (void)startWork:(CDVInvokedUrlCommand*)command{
     NSLog(@"绑定");
     
+    
     _observer = [[NSNotificationCenter defaultCenter] addObserverForName:CDVRemoteNotification
                   object:nil
                   queue:[NSOperationQueue mainQueue]
                   usingBlock:^(NSNotification *note) {
                       NSData *deviceToken = [note object];
                       [BPush registerDeviceToken:deviceToken];
+
+                      
                       [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
                           // 绑定返回值
                           if ([self returnBaiduResult:result])
                           {
-                              #warning TODO result中的user id、channel id可以在这个时候发送给server
-                              
-                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
                           }
                           else{
-                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:result];
                           }
                           [[NSNotificationCenter defaultCenter] removeObserver:_observer];
                           [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
                       }];
                   }];
     
-    // iOS8 下需要使用新的 API
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
         
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
     }else {
         UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
     }
     
-    /*
-    [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
-        // 绑定返回值
-        if ([self returnBaiduResult:result])
-        {
-            self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        }
-        else{
-            self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        }
-        [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
-    }];
-    */
 }
 
 /*!
