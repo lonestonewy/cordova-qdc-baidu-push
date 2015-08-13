@@ -12,20 +12,20 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.baidu.android.pushservice.PushConstants;
-import com.baidu.frontia.api.FrontiaPushMessageReceiver;
+import com.baidu.android.pushservice.PushMessageReceiver;
 import __PACKAGE_NAME__;
 
 /**
  * 百度云推送Service
- * 
+ *
  * @author NCIT
  *
  */
-public class BaiduPushReceiver extends FrontiaPushMessageReceiver {
+public class BaiduPushReceiver extends PushMessageReceiver {
 
 	/** LOG TAG */
     private static final String LOG_TAG = BaiduPushReceiver.class.getSimpleName();
-    
+
     /** 回调类型 */
     private enum CB_TYPE {
     	onbind,
@@ -216,7 +216,7 @@ public class BaiduPushReceiver extends FrontiaPushMessageReceiver {
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
         }
-        
+
     }
 
     /**
@@ -285,7 +285,7 @@ public class BaiduPushReceiver extends FrontiaPushMessageReceiver {
 
     /**
      * 接收推送内容并返回给前端JS
-     * 
+     *
      * @param jsonObject JSON对象
      */
     private void sendPushData(JSONObject jsonObject) {
@@ -300,7 +300,7 @@ public class BaiduPushReceiver extends FrontiaPushMessageReceiver {
 
     /**
      * 设定字符串类型JSON对象，如值为空时不设定
-     * 
+     *
      * @param jsonObject JSON对象
      * @param name 关键字
      * @param value 值
