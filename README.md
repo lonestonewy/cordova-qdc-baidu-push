@@ -5,6 +5,7 @@
 -- 2015.06.15 基于百度Android SDK【L2-4.4.1】
 
 -- 2015.07.24 修正了IOS版本存在的问题
+-- 2015.08.13 升级jar包到最新版，这个版本去掉了对Frontia的依赖（如果你要同时用百度分享，就还是用老版本）
 
 # 1. Android客户端安装
 开发工程下执行以下命令导入本插件：
@@ -20,15 +21,6 @@
 
 	# 【com.qdc.plugins.baidu.push】是插件ID，不是插件文件夹名
 	$ionic plugin rm com.qdc.plugins.baidu.push
-
-## 1.1 Android开发环境导入--Eclipse
-导入路径：开发工程->platform->android
-
-打开AndroidManifest.xml文件，找到【application】节点，追加以下属性
-
-```xml
- android:name="com.baidu.frontia.FrontiaApplication"
-```
 
 ## 1.2 IOS开发环境导入--Xcode
 导入路径：开发工程->platform->ios
