@@ -7,7 +7,7 @@
 -- 2015.07.24 修正了IOS版本存在的问题
 -- 2015.08.13 升级jar包到最新版，这个版本去掉了对Frontia的依赖（如果你要同时用百度分享，就还是用老版本）
 
-# 1. Android客户端安装
+
 开发工程下执行以下命令导入本插件：
 
 	$ ionic plugin add https://github.com/mrwutong/cordova-qdc-baidu-push.git
@@ -22,12 +22,12 @@
 	# 【com.qdc.plugins.baidu.push】是插件ID，不是插件文件夹名
 	$ionic plugin rm com.qdc.plugins.baidu.push
 
-## 1.2 IOS开发环境导入--Xcode
+## 1 IOS开发环境导入--Xcode
 导入路径：开发工程->platform->ios
 
 确认没有编译错误。
 
-## 1.3 JS调用说明
+## 2 JS调用说明
 
 baidu_push.startWork
 
