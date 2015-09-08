@@ -152,6 +152,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotification object:deviceToken];
 }
 
+// 切记不能忘啊！
+- (void) application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    [application registerForRemoteNotifications];
+}
+
 - (void) application:(UIApplication*)application
     didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
